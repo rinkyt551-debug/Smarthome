@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+  Smart Home dashboard - the page structure (HTML).
+  style.css  = how it looks
+  script.js  = what the buttons do and how it talks to server.cpp
+  Elements with an id="..." are the ones script.js reads or changes.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>HomeOS | Smart Home Controller</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+
+    <!-- TOP BAR: name and connection status -->
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="HomeOS dashboard home"><span class="brand-mark">⌂</span><span>home<span class="brand-light">OS</span></span></a>
+      <div class="top-meta"><span class="live-dot"></span><span id="connection-label">Connecting to C++ server…</span><span class="divider-dot">•</span><span>LOCAL CONTROL</span></div>
+    </header>
+
+    <main id="top">
+      <!-- WELCOME AREA -->
+      <section class="welcome">
+        <div><p class="eyebrow">YOUR SPACE. YOUR SETTINGS.</p><h1>Smart home <span>control.</span></h1><p class="intro">Everything at home, in one calm and simple place.</p></div>
+        <div class="overview"><div class="overview-icon">⌂</div><div><span class="overview-label">HOME STATUS</span><strong id="active-count">4 devices active</strong><small>Changes saved by the C++ server</small></div></div>
+      </section>
+
+      <!-- MESSAGE BAR: shows "Brightness set to 60%", errors, etc. -->
+      <section class="message-row" aria-live="polite"><span class="message-symbol" id="message-symbol">✓</span><p id="message">Loading your saved device settings…</p><span class="save-state" id="save-state">SYNCING</span></section>
+
+      <section class="section-heading"><div><p class="eyebrow">ROOM CONTROLS</p><h2>Your devices</h2></div><p class="section-note">Tap a control to update the device state.</p></section>
+
+      <section class="device-grid">
+
+        <!-- CARD 1: LIGHT -->
+        <article class="device-card light-card" id="light">
+          <div class="card-top"><div class="device-icon icon-light">☼</div><span class="status"><i></i><span id="light-status">ON</span></span></div>
+          <div class="device-heading"><div><p class="device-type">LIGHTING</p><h3>Living room light</h3></div><span class="device-number">01</span></div>
+          <div class="metric"><strong><span id="light-level">50</span><small>%</small></strong><span class="metric-caption">Brightness level</span></div>
+          <div class="range-track"><span id="light-track" style="width:50%"></span></div>
+          <div class="button-row"><button class="btn btn-secondary" id="light-down">− Dimmer</button><button class="btn btn-secondary" id="light-up">+ Brighter</button></div>
+          <button class="btn btn-power" id="light-power">Switch off <span>↗</span></button>
+        </article>
+
+        <!-- CARD 2: FAN (speed 0 to 5) -->
+        <article class="device-card fan-card" id="fan">
+          <div class="card-top"><div class="device-icon icon-fan">✣</div><span class="status"><i></i><span id="fan-status">ON</span></span></div>
+          <div class="device-heading"><div><p class="device-type">AIR FLOW</p><h3>Ceiling fan</h3></div><span class="device-number">02</span></div>
+          <div class="metric"><strong id="fan-speed">0</strong><span class="metric-caption">Fan speed <span class="unit-note">/ 5</span></span></div>
+          <div class="speed-meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="button-row"><button class="btn btn-secondary" id="fan-down">− Slower</button><button class="btn btn-secondary" id="fan-up">+ Faster</button></div>
+          <div class="button-row speed-buttons" style="margin-top:9px"><button class="btn btn-secondary" data-speed="low">Low</button><button class="btn btn-secondary" data-speed="medium">Med</button><button class="btn btn-secondary" data-speed="high">High</button></div>
+          <button class="btn btn-power" id="fan-power">Switch off <span>↗</span></button>
+        </article>
+
+        <!-- CARD 3: SMART AC (temperature, mode 0/1/2, sleep timer) -->
+        <article class="device-card ac-card" id="ac">
+          <div class="card-top"><div class="device-icon icon-ac">❄</div><span class="status"><i></i><span id="ac-status">ON</span></span></div>
+          <div class="device-heading"><div><p class="device-type">CLIMATE</p><h3>Smart AC</h3></div><span class="device-number">03</span></div>
+          <div class="metric"><strong><span id="ac-temp">24</span><small>°C</small></strong><span class="metric-caption" id="ac-fahrenheit">75.2 °F</span></div>
+          <div class="button-row"><button class="btn btn-secondary" id="ac-down">− Cooler</button><button class="btn btn-secondary" id="ac-up">+ Warmer</button></div>
+          <div class="mode-row"><span>MODE</span><div class="segmented"><button data-mode="0">Eco</button><button data-mode="1">Normal</button><button data-mode="2">Turbo</button></div></div>
+          <div class="timer-row"><div><span class="timer-icon">◷</span><div><strong>Sleep timer</strong><small>0 = timer disabled</small></div></div><div class="timer-controls"><button id="ac-timer-down" aria-label="Decrease timer">−</button><strong><span id="ac-timer">0</span><small> min</small></strong><button id="ac-timer-up" aria-label="Increase timer">+</button></div></div>
+          <button class="btn btn-power" id="ac-power">Switch off <span>↗</span></button>
+        </article>
+
+        <!-- CARD 4: TV -->
+        <article class="device-card tv-card" id="tv">
+          <div class="card-top"><div class="device-icon icon-tv">▣</div><span class="status"><i></i><span id="tv-status">ON</span></span></div>
+          <div class="device-heading"><div><p class="device-type">ENTERTAINMENT</p><h3>Living room TV</h3></div><span class="device-number">04</span></div>
+          <div class="tv-metrics"><div class="metric"><strong id="tv-channel">1</strong><span class="metric-caption">Channel</span></div><div class="metric"><strong><span id="tv-volume">20</span><small>%</small></strong><span class="metric-caption">Volume</span></div></div>
+          <div class="control-line"><span>VOLUME</span><div class="button-row"><button class="btn btn-secondary" id="tv-vol-down">−</button><button class="btn btn-secondary" id="tv-vol-up">+</button></div></div>
+          <div class="control-line"><span>CHANNEL</span><div class="button-row"><button class="btn btn-secondary" id="tv-ch-down">−</button><button class="btn btn-secondary" id="tv-ch-up">+</button></div></div>
+          <button class="btn btn-power" id="tv-power">Switch off <span>↗</span></button>
+        </article>
+      </section>
+
+      <!-- NOTE: explains the connection to the C++ server -->
+      <section class="backend-note"><div class="backend-mark">{ }</div><div><strong>Powered by your C++ server</strong><p>Every control is checked and saved by <code>server.cpp</code> into <code>state.txt</code>, the same file the console program <code>smarthome.exe</code> uses.</p></div><span class="backend-status" id="backend-status">LOCAL SERVER</span></section>
+    </main>
+
+    <footer><span>HOMEOS <b>•</b> SMART HOME CONTROLLER</span><span>Built with C++ · HTML · CSS · JavaScript</span></footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

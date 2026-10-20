@@ -1,0 +1,174 @@
+/* Smart Home dashboard styles. Each rule is on one line.
+   Colours are defined once at the top (:root) and reused with var(--name). */
+
+/* ---- COLOURS AND PAGE BASICS ---- */
+:root { --bg:#f4f6fa; --paper:#fff; --ink:#152035; --muted:#778197; --line:#e8ecf3; --navy:#101827; --blue:#4b6cf5; --mint:#dff8ed; --green:#16845b; --red:#bd4452; --shadow:0 14px 40px rgba(28,43,73,.055); }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:'DM Sans',Arial,sans-serif; font-size:14px; }
+.shell { max-width:1220px; margin:0 auto; padding:0 38px; }
+
+/* ---- TOP BAR ---- */
+.topbar { height:82px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #e6eaf1; }
+.brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font-family:Manrope,sans-serif; font-size:20px; font-weight:800; letter-spacing:-.9px; }
+.brand-mark { display:grid; place-items:center; width:34px; height:34px; border-radius:11px; background:var(--navy); color:#fff; font-size:24px; line-height:1; }
+.brand-light { color:var(--blue); }
+.top-meta { display:flex; align-items:center; gap:9px; color:#7a8496; font-size:10px; font-weight:700; letter-spacing:1.05px; }
+.live-dot,.status i { width:7px; height:7px; border-radius:50%; background:#23b47e; display:inline-block; box-shadow:0 0 0 3px rgba(35,180,126,.12); }
+.divider-dot { color:#c0c6d0; }
+
+/* ---- WELCOME AREA ---- */
+.welcome { padding:44px 0 32px; display:flex; align-items:flex-end; justify-content:space-between; gap:22px; }
+.eyebrow { font-size:10px; font-weight:700; letter-spacing:1.65px; color:#7b86a0; margin:0 0 10px; }
+
+/* ---- WELCOME AREA ---- */
+.welcome h1 { font:800 clamp(30px,4vw,43px)/1.12 Manrope,sans-serif; letter-spacing:-1.9px; margin:0; }
+
+/* ---- WELCOME AREA ---- */
+.welcome h1 span { color:var(--blue); }
+.intro { margin:13px 0 0; color:var(--muted); font-size:14px; }
+.overview { display:flex; align-items:center; gap:13px; background:#fff; border:1px solid var(--line); border-radius:16px; padding:15px 19px; min-width:270px; box-shadow:0 7px 22px rgba(25,43,78,.025); }
+.overview-icon { width:40px; height:40px; border-radius:12px; background:#eef1ff; color:var(--blue); display:grid; place-items:center; font-size:25px; }
+.overview-label { display:block; color:#8992a5; font-size:9px; font-weight:700; letter-spacing:1.3px; margin-bottom:3px; }
+.overview strong { display:block; font:700 14px Manrope,sans-serif; }
+.overview small { display:block; color:#8a94a6; font-size:10px; margin-top:3px; }
+
+/* ---- STATUS MESSAGE BAR ---- */
+.message-row { display:flex; align-items:center; gap:10px; padding:12px 15px; background:#eef8f3; border:1px solid #d8f0e4; border-radius:12px; color:#286d50; margin-bottom:31px; min-height:48px; }
+
+/* ---- STATUS MESSAGE BAR ---- */
+.message-row.error { background:#fff1f2; border-color:#f7d7dc; color:#a52e41; }
+.message-symbol { display:grid; place-items:center; width:23px; height:23px; background:#d7f2e4; border-radius:8px; font-weight:700; }
+
+/* ---- STATUS MESSAGE BAR ---- */
+.message-row.error .message-symbol { background:#ffdde1; }
+
+/* ---- STATUS MESSAGE BAR ---- */
+.message-row p { margin:0; font-size:12px; flex:1; }
+.save-state { font-size:9px; font-weight:700; letter-spacing:1px; opacity:.75; }
+
+/* ---- "YOUR DEVICES" HEADING ---- */
+.section-heading { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:17px; }
+
+/* ---- "YOUR DEVICES" HEADING ---- */
+.section-heading h2 { font:800 23px Manrope,sans-serif; letter-spacing:-.8px; margin:0; }
+.section-note { margin:0 0 3px; color:#929bad; font-size:11px; }
+
+/* ---- DEVICE CARDS (shared by light, fan, AC and TV) ---- */
+.device-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.device-card { position:relative; overflow:hidden; background:var(--paper); border:1px solid #e9edf4; border-radius:19px; padding:23px 24px 21px; box-shadow:var(--shadow); transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; }
+.device-card:hover { transform:translateY(-2px); box-shadow:0 18px 45px rgba(28,43,73,.085); }
+.card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+.device-icon { width:43px; height:43px; display:grid; place-items:center; border-radius:14px; font-size:25px; font-weight:600; }
+.icon-light { background:#fff4d8; color:#c88b13; }
+.icon-fan { background:#e3f8f0; color:#17966e; }
+.icon-ac { background:#e7edff; color:#4b6cf5; }
+.icon-tv { background:#f0e8ff; color:#8655d8; }
+.status { display:inline-flex; align-items:center; gap:8px; padding:6px 9px; border-radius:8px; background:#eff9f4; color:#21805b; font-size:9px; font-weight:700; letter-spacing:1px; }
+.device-card.off .status { background:#f2f3f6; color:#8b93a3; }
+.device-card.off .status i { background:#a8afbb; box-shadow:none; }
+.device-heading { display:flex; align-items:center; justify-content:space-between; }
+.device-type { font-size:9px; letter-spacing:1.45px; color:#a0a8b8; font-weight:700; margin:0 0 5px; }
+.device-heading h3 { font:700 17px Manrope,sans-serif; letter-spacing:-.45px; margin:0; }
+.device-number { font:700 12px Manrope,sans-serif; color:#d3d9e4; }
+
+/* ---- BIG NUMBERS ---- */
+.metric { display:flex; flex-direction:column; align-items:flex-start; margin:23px 0 15px; }
+.metric strong { font:800 36px/1 Manrope,sans-serif; letter-spacing:-1.5px; }
+.metric strong small { font-size:16px; letter-spacing:0; margin-left:3px; color:#77839b; }
+.metric-caption { font-size:11px; color:#8b95a8; margin-top:7px; }
+.unit-note { color:#b0b7c4; }
+.range-track { height:5px; border-radius:9px; background:#edf0f5; margin:0 0 18px; overflow:hidden; }
+.range-track span { display:block; height:100%; background:linear-gradient(90deg,#f5c65d,#e8a52e); border-radius:9px; transition:width .2s; }
+
+/* ---- BUTTONS ---- */
+.button-row { display:flex; gap:9px; }
+.btn { font:600 11px 'DM Sans',sans-serif; cursor:pointer; border:1px solid transparent; border-radius:9px; min-height:36px; transition:background .15s ease,border-color .15s ease,transform .1s ease; }
+.btn:active,.timer-controls button:active { transform:scale(.97); }
+.btn-secondary { background:#f7f8fb; border-color:#edf0f5; color:#3b465b; flex:1; }
+.btn-secondary:hover { background:#eef1ff; border-color:#dce2ff; color:#3e5bea; }
+.btn-power { width:100%; display:flex; justify-content:space-between; align-items:center; margin-top:13px; background:var(--navy); color:#fff; padding:0 14px; }
+.btn-power span { font-size:16px; color:#aab5d2; }
+.btn-power:hover { background:#263652; }
+.device-card.off .btn-power { background:#e9edf4; color:#58647a; }
+.device-card.off .btn-power span { color:#78839a; }
+
+/* ---- FAN SPEED BARS ---- */
+.speed-meter { display:flex; gap:5px; margin:1px 0 18px; }
+
+/* ---- FAN SPEED BARS ---- */
+.speed-meter i { height:4px; flex:1; background:#edf0f5; border-radius:5px; }
+
+/* ---- FAN SPEED BARS ---- */
+.speed-meter i.active { background:#20b483; }
+.speed-buttons .chosen { background:#e0f7ee; border-color:#c7eddf; color:#16845b; }
+
+/* ---- AC MODE SWITCH AND TIMER ---- */
+.mode-row { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:15px; }
+
+/* ---- AC MODE SWITCH AND TIMER ---- */
+.mode-row>span,.control-line>span { font-size:9px; font-weight:700; letter-spacing:1.1px; color:#9ca5b6; }
+.segmented { display:flex; padding:3px; background:#f5f6fa; border-radius:9px; gap:2px; }
+.segmented button { border:0; background:transparent; border-radius:7px; padding:7px 10px; font:600 10px 'DM Sans',sans-serif; color:#8791a5; cursor:pointer; }
+.segmented button.chosen { background:#e5eaff; color:#3d5df1; box-shadow:0 2px 5px rgba(41,66,174,.08); }
+.timer-row { display:flex; justify-content:space-between; align-items:center; margin-top:17px; padding:12px 0; border-top:1px solid #edf0f5; }
+.timer-row>div:first-child { display:flex; align-items:center; gap:9px; }
+.timer-icon { display:grid; place-items:center; width:31px; height:31px; border-radius:10px; background:#f1f3ff; color:#536cf4; font-size:19px; }
+.timer-row strong { display:block; font-size:11px; }
+.timer-row small { display:block; font-size:9px; color:#929bad; margin-top:3px; }
+.timer-controls { display:flex; align-items:center; gap:9px; }
+.timer-controls button { width:27px; height:27px; border:1px solid #e8ecf4; border-radius:8px; background:#f8f9fc; color:#596780; font-size:17px; cursor:pointer; }
+.timer-controls strong { text-align:center; min-width:37px; font:700 15px Manrope,sans-serif; }
+.timer-controls strong small { display:inline; font:500 9px 'DM Sans',sans-serif; }
+
+/* ---- TV CONTROLS ---- */
+.tv-metrics { display:flex; gap:35px; }
+
+/* ---- TV CONTROLS ---- */
+.tv-metrics .metric { margin:24px 0 18px; }
+.control-line { display:flex; align-items:center; justify-content:space-between; border-top:1px solid #f0f2f6; padding:10px 0; }
+.control-line .button-row { width:100px; }
+.control-line .btn { min-height:29px; }
+
+/* ---- BACKEND NOTE AND FOOTER ---- */
+.backend-note { display:flex; align-items:center; gap:14px; padding:19px 21px; background:#111b2d; border-radius:15px; color:white; margin-top:23px; }
+.backend-mark { display:grid; place-items:center; width:39px; height:39px; border-radius:11px; background:#25314a; color:#8ea2ff; font:700 14px monospace; }
+
+/* ---- BACKEND NOTE AND FOOTER ---- */
+.backend-note strong { font:700 12px Manrope,sans-serif; }
+
+/* ---- BACKEND NOTE AND FOOTER ---- */
+.backend-note p { margin:5px 0 0; color:#aab4c7; font-size:10px; line-height:1.6; }
+
+/* ---- BACKEND NOTE AND FOOTER ---- */
+.backend-note code { color:#d4dcff; background:#26314a; padding:2px 5px; border-radius:4px; }
+.backend-status { margin-left:auto; white-space:nowrap; color:#8be1bd; font-size:9px; font-weight:700; letter-spacing:1px; }
+footer { display:flex; justify-content:space-between; gap:15px; padding:25px 0 30px; color:#9ba4b4; font-size:9px; letter-spacing:.35px; }
+footer b { color:#4f6af3; margin:0 4px; }
+
+/* ---- DEVICE SWITCHED OFF (greyed out) ---- */
+.device-card.off .metric,.device-card.off .range-track,.device-card.off .speed-meter,.device-card.off .mode-row,.device-card.off .timer-row,.device-card.off .tv-metrics,.device-card.off .control-line { opacity:.55; }
+.device-card.off .btn-secondary { opacity:.6; }
+
+/* ---- PHONE LAYOUT ---- */
+@media(max-width:760px) {
+  .shell { padding:0 18px; }
+  .topbar { height:70px; }
+  .top-meta { font-size:8px; letter-spacing:.5px; }
+  .welcome { padding:34px 0 25px; align-items:flex-start; flex-direction:column; }
+  .overview { min-width:0; width:100%; }
+  .device-grid { grid-template-columns:1fr; }
+  .device-card { padding:21px; }
+  .section-heading { align-items:flex-start; gap:15px; flex-direction:column; }
+  .section-note { margin:0; }
+  .backend-note { align-items:flex-start; }
+  .backend-status { display:none; }
+  footer { flex-direction:column; line-height:1.6; }
+  .welcome h1 { font-size:34px; }
+}
+
+/* ---- LARGE SCREEN ---- */
+@media(min-width:1100px) {
+  .device-card { min-height:330px; }
+  .ac-card { grid-row:span 1; }
+  .tv-card { min-height:330px; }
+}
